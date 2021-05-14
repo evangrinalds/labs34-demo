@@ -4,13 +4,14 @@ import plotly.express as px
 import numpy as np
 import plotly.graph_objects as go
 
-router = APIRouter()
+app = APIRouter()
 
 
-@router.get('/vizbacker')
-async def visual():
+@app.get("/vis/correlations")
+async def correlations():
+    """ Correlation Matrix Heat Map """
     # load in dataset
-    DATA_PATH = 'https://raw.githubusercontent.com/evangrinalds/files/master/data/goal.csv'
+    DATA_PATH = 'https://raw.githubusercontent.com/'
     df = pd.read_csv(DATA_PATH, index_col=0)
     
     labels = ['$5,000', '$10,000', '$15,000', '$20,000', '$25,000+']
@@ -30,3 +31,14 @@ async def visual():
 
     fig.show()
     return fig.to_json()
+
+@app.get("/vis/correlations")
+def correlations():
+    """ Correlation Matrix Heat Map """
+    pass
+@app.get("/vis/judges/{judge_id}")
+def vis_judges(judge_name: str):
+    pass
+@app.get("/vis/circuits/{circuit_id}")
+def vis_circuits(circuit_name: str):
+    pass
